@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/liebg"
+    android:orientation="vertical">
+
+    <!--   -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue">
+
+        <Button
+            android:id="@+id/returnSetMain"
+            style="@style/top_all"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="0dp"
+            android:text="返回"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="设置路由模式"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gotoSystemWifi1"
+            android:layout_width="106dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/acm_inputbox"
+            android:src="@drawable/wifibefore" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="147dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/lbs_popup_bg"
+            android:paddingTop="21dp"
+            android:paddingBottom="10dp">
+
+  <!--          <ImageView
+                android:id="@+id/gotoSystemWifi"
+                android:layout_width="66dp"
+                android:layout_height="82dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="0dp"
+                android:background="@drawable/setrouter" />-->
+
+            <EditText
+                android:id="@+id/ssid_edit_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/pwd_edit_login"
+                android:hint="输入wifi名称"
+                android:lines="1"
+                android:paddingLeft="45sp"
+                android:textColor="#082CB1"
+                android:textSize="16sp" />
+
+            <!-- 文本框左边帐号提示 -->
+
+            <TextView
+                android:id="@+id/mingchen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/ssid_edit_account"
+                android:layout_alignLeft="@+id/ssid_edit_account"
+                android:layout_alignTop="@+id/ssid_edit_account"
+                android:layout_alignBottom="@+id/ssid_edit_account"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:gravity="center_vertical"
+                android:paddingStart="7sp"
+                android:paddingLeft="7sp"
+                android:text="名称"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
+
+
+            <!-- 下拉菜单按钮 -->
+
+
+            <ImageButton
+                android:id="@+id/select_wifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ssid_edit_account"
+                android:layout_alignRight="@+id/ssid_edit_account"
+                android:layout_alignBottom="@+id/ssid_edit_account"
+                android:layout_marginRight="0dp"
+                android:background="@drawable/option" />
+
+            <!-- 密码文本框 -->
+
+            <EditText
+                android:id="@+id/pwd_edit_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ssid_edit_account"
+                android:layout_alignStart="@+id/ssid_edit_account"
+                android:layout_alignLeft="@+id/ssid_edit_account"
+                android:layout_alignEnd="@+id/ssid_edit_account"
+                android:layout_alignRight="@+id/ssid_edit_account"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="-1dp"
+                android:layout_marginRight="-1dp"
+                android:background="@drawable/pwd_edit_login"
+                android:hint="输入wifi密码"
+                android:lines="1"
+                android:paddingLeft="45sp"
+                android:textColor="#E91E63" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/pwd_edit_account"
+                android:layout_alignLeft="@+id/pwd_edit_account"
+                android:layout_alignTop="@+id/pwd_edit_account"
+                android:layout_alignBottom="@+id/pwd_edit_account"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:gravity="center_vertical"
+                android:paddingStart="1dp"
+                android:paddingLeft="1dp"
+                android:text="密码"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- 记住密码选项 -->
+        </RelativeLayout>
+
+        <!-- 复选框层 -->
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:stretchColumns="1">
+
+            <RadioGroup
+                android:id="@+id/group_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:background="@drawable/acm_inputbox"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/AP"
+                    style="@style/MyCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="AP" />
+
+                <RadioButton
+                    android:id="@+id/ROUTER"
+                    style="@style/MyCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:text="Router" />
+
+                <RadioButton
+                    android:id="@+id/HOTSPOT"
+                    style="@style/MyCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:text="HotSpot" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/group_sensor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="start"
+                android:background="@drawable/acm_inputbox"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/setSensor_50"
+                    style="@style/MyCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="50X" />
+
+                <RadioButton
+                    android:id="@+id/setSensor_100"
+                    style="@style/MyCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="100X" />
+
+                <RadioButton
+                    android:id="@+id/setSensor_200"
+                    style="@style/MyCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="200X" />
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/group_device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="start"
+                android:background="@drawable/acm_inputbox"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/setBM558"
+                    style="@style/MyCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="BM558" />
+
+                <RadioButton
+                    android:id="@+id/setBM999"
+                    style="@style/MyCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="BM999" />
+
+                <RadioButton
+                    android:id="@+id/setBM189"
+                    style="@style/MyCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:text="BM189" />
+            </RadioGroup>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/remenberwifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:button="@drawable/qq_btn_check"
+                android:checked="true"
+                android:text="记住wifi"
+                android:background="@drawable/acm_inputbox"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_getwifi"
+                style="@style/top_group"
+                android:layout_width="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="1"
+                android:text="获取wifi"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_savewifi"
+                style="@style/top_all"
+                android:layout_width="0dp"
+
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:text="保存wifi"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 底部 -->
+
+    <include layout="@layout/common_title_bar" />
+
+</LinearLayout>

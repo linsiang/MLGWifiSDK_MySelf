@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="color1">#1CF803</drawable>
+    <drawable name="color2">#fff</drawable>
+    <string name="ROUTER">ROUTER</string>
+    <string name="HOTSPOT">Hotspot</string>
+    <string name="btnsearch">search device</string>
+    <string name="btnok">save settings</string>
+    <string name="EQUIPMENT">device</string>
+    <string name="app_name">MLGSDK</string>
+    <string name="lblselectprogram">lblselectprogram</string>
+    <string name="StopVideo">Stop</string>
+    <string name="Capture">Capture</string>
+    <string name="StartVideo">Start</string>
+    <string name="SetPort">SetAPPPort</string>
+    <string name="GetPort">GetDevPort</string>
+    <string name="GetErrPort">Test connection</string>
+    <string name="GetAppPort">GetAppPort</string>
+    <string name="default_ap_ssid">mlgxxx</string>
+    <string name="default_ap_pwd">88888888</string>
+    <string name="title_home">wifi</string>
+    <string name="title_dashboard">english</string>
+    <string name="title_notifications">中文</string>
+    <string name="main_button_setting">setting</string>
+    <string name="main_button_login">login</string>
+    <string name="setEnglish">english</string>
+    <string name="setChinese">中文</string>
+    <string name="main_leftbutton">左边按钮</string>
+    <string name="main_rightbutton">右边按钮</string>
+	<string name="setWifiMsg">获取wifi信息</string>
+    <string name="saveWifiMsg">保存wifi设置</string>
+</resources>
