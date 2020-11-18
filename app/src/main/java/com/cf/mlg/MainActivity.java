@@ -4,6 +4,8 @@ import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -138,13 +140,15 @@ public class MainActivity extends SetRouter {
         //AlertDiaLog显示
         final AlertDialog customAlert = setDeBugDialog.show();
         Window window = customAlert.getWindow();
-        //  window.setBackgroundDrawableResource(R.drawable.save_parameter_btn_baackground);
+        //  window.setBackgroundDrawableResource(R.drawable.border);
         window.setLayout(this.getResources().getDisplayMetrics().widthPixels * 6 / 10, this.getResources().getDisplayMetrics().heightPixels);
+        //   getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//设置Dialog背景透明
+        //   getWindow().setDimAmount(0f);//设置Dialog窗口后面的透明度
         //设置自定义界面的点击事件逻辑
         dialogView.findViewById(R.id.select_wifi1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] str = SelectWifiName(ssid1,pwd1);
+                String[] str = SelectWifiName(ssid1, pwd1);
                 ssid1.setText(str[0]);
                 pwd1.setText(str[1]);
               /*  ssid1.setText(str);
@@ -181,7 +185,7 @@ public class MainActivity extends SetRouter {
         //保存wifi设置
         okButton.setOnClickListener(view -> {
             SetRouterWifi(ssid1, pwd1);
-            write_ssid_pwd(ssid1.getText().toString(),pwd1.getText().toString());
+            write_ssid_pwd(ssid1.getText().toString(), pwd1.getText().toString());
             saveRouterSSID(ssid1.getText().toString(), pwd1.getText().toString());
         });
         //获取wifi信息

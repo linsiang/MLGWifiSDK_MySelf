@@ -3,15 +3,16 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               xmlns:tools="http://schemas.android.com/tools"
-              android:background="@drawable/reallybg"
               android:orientation="vertical"
+              android:background="@drawable/realbg"
               android:padding="10dp">
-	
-	
 	<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
+			android:layout_marginTop="0dp"
+			android:layout_marginRight="0dp"
+			android:layout_marginLeft="0dp"
 			android:layout_marginBottom="10dp">
 		
 		<LinearLayout
@@ -22,8 +23,6 @@
 					android:layout_width="30dp"
 					android:layout_height="30dp"
 					android:background="@drawable/cameaxmltoggle"/>
-		
-		
 		</LinearLayout>
 		<LinearLayout
 				android:layout_width="0dp"
@@ -34,7 +33,7 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
 					android:gravity="center"
-					android:text="设置ap模式"
+					android:text="@string/setmodel"
 					android:textColor="@color/blue"
 					android:textSize="25sp"/>
 		
@@ -48,7 +47,8 @@
 					android:id="@+id/system_admin_psw_alert_close"
 					android:layout_height="30dp"
 					android:layout_width="30dp"
-					android:background="@drawable/power_off"
+					android:background="@drawable/closedialog"
+					android:layout_marginEnd="0dp"
 					android:contentDescription="TODO"/>
 		</LinearLayout>
 	
@@ -70,13 +70,13 @@
 		>
 			<RelativeLayout
 					android:layout_width="match_parent"
-					android:layout_height="147dp"
+					android:layout_height="wrap_content"
 					android:layout_marginLeft="1dp"
 					android:layout_marginTop="1dp"
 					android:layout_marginRight="1dp"
 					android:background="@drawable/lbs_popup_bg"
 					android:paddingTop="21dp"
-					android:paddingBottom="10dp">
+					android:paddingBottom="30dp">
 				
 				<!--          <ImageView
 							  android:id="@+id/gotoSystemWifi"
@@ -182,7 +182,7 @@
 						android:id="@+id/main_group_model"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="5dp"
+						android:layout_marginTop="10dp"
 						android:layout_marginStart="10dp"
 						android:layout_marginEnd="10dp"
 						android:gravity="start"
@@ -221,6 +221,7 @@
 				</RadioGroup>
 			
 			</LinearLayout>
+		
 			<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"

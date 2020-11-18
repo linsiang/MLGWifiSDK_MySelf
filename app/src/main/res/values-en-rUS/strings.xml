@@ -29,4 +29,5 @@
     <string name="main_rightbutton">Right Button</string>
 	<string name="setWifiMsg">获取wifi信息</string>
     <string name="saveWifiMsg">保存wifi设置</string>
+	<string name="setmodel">Set Router Model</string>
 </resources>
