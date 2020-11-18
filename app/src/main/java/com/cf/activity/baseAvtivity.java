@@ -1,6 +1,4 @@
-package com.cf.mlg;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.cf.activity;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

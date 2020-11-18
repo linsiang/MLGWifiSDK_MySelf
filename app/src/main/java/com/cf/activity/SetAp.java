@@ -1,4 +1,4 @@
-package com.cf.mlg;
+package com.cf.activity;
 
 
 import android.content.Intent;

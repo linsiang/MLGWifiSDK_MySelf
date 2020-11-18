@@ -1,13 +1,10 @@
-package com.cf.mlg;
+package com.cf.activity;
 
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +16,6 @@ import com.cf.R;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class MainActivity extends SetRouter {
 

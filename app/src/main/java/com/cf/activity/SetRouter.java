@@ -1,4 +1,4 @@
-package com.cf.mlg;
+package com.cf.activity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -20,7 +20,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
