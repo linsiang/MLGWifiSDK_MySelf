@@ -36,7 +36,7 @@ import android.widget.RelativeLayout;
 
 import com.cf.R;
 import com.cf.cf685.Video;
-import com.cf.Adapter.BmpAdapter;
+import com.cf.adapter.BmpAdapter;
 import com.cf.pojo.BmpList;
 import com.cf.util.BmpUtil;
 import com.cf.util.MlgUtil;

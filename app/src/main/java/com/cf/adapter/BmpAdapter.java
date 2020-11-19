@@ -1,4 +1,4 @@
-package com.cf.Adapter;
+package com.cf.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.cf.R;
 import com.cf.pojo.BmpList;

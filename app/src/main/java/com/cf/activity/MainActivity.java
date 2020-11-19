@@ -26,7 +26,6 @@ public class MainActivity extends SetRouter {
     private ImageButton logoutSystem;
     private Button textbutton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,13 +63,11 @@ public class MainActivity extends SetRouter {
         main_wifi.setOnClickListener(v -> {
             // startActivity(new Intent("android.settings.WIFI_SETTINGS"));
             startActivity(new Intent("android.settings.WIFI_SETTINGS"), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-
             //  overridePendingTransition(R.anim.pop_enter, R.anim.pop_out);
         });
         main_settings.setOnClickListener(v -> {
             //    startActivity(new Intent(this,NewMainActivity.class));
             startActivity(new Intent(this, SetRouter.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-
             //  overridePendingTransition(R.anim.pop_enter, R.anim.pop_out);
             finish();
         });
