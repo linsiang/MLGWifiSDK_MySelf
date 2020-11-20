@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <drawable name="color1">#1CF803</drawable>
-    <drawable name="color2">#fff</drawable>
-    <string name="ROUTER">路由模式</string>
+	<string name="ROUTER">路由模式</string>
     <string name="HOTSPOT">热点模式</string>
     <string name="btnsearch" >搜索设备</string>
     <string name="btnok" >保存设置</string>
@@ -18,14 +16,7 @@
     <string name="GetAppPort">APP端口</string>
     <string name="default_ap_ssid">mlgxxx</string>
     <string name="default_ap_pwd">88888888</string>
-    <string name="title_home">wifi</string>
-    <string name="title_dashboard">english</string>
-    <string name="title_notifications">中文</string>
-    <string name="main_button_setting">设置</string>
-    <string name="main_button_login">登录</string>
-    <string name="setEnglish">english</string>
-    <string name="setChinese">中文</string>
-    <string name="main_leftbutton">左边按钮</string>
+	<string name="main_leftbutton">左边按钮</string>
     <string name="main_rightbutton">右边按钮</string>
 	<string name="setWifiMsg">获取wifi信息</string>
     <string name="saveWifiMsg">保存wifi设置</string>

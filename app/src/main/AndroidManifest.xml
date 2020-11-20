@@ -29,7 +29,7 @@
         tools:replace="android:icon"
         android:requestLegacyExternalStorage="true"
         tools:targetApi="q">
-        <activity android:name=".mlg.MainActivity"
+        <activity android:name=".activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
             >
@@ -41,20 +41,20 @@
 
 
         </activity>
-        <activity android:name=".mlg.SetAp" />
+        <activity android:name=".activity.SetAp" />
         <activity
-            android:name=".mlg.SetRouter"
+            android:name=".activity.SetRouter"
             android:theme="@style/AppTheme">
 
         </activity>
-        <activity android:name=".mlg.baseAvtivity" />
-        <activity android:name=".mlg.permissionActivity" />
+        <activity android:name=".activity.baseAvtivity" />
+        <activity android:name=".activity.permissionActivity" />
         <activity
-            android:name=".mlg.CameraSetting"
+            android:name=".activity.CameraSetting"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".mlg.VideoSDK"
+            android:name=".activity.VideoSDK"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
