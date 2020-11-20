@@ -10,6 +10,11 @@ android {
         targetSdkVersion 30
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false        //
@@ -20,7 +25,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
-   
+
 }
 
 static def releaseTime() {

@@ -25,9 +25,7 @@ public class MlgUtil extends Activity {
     public static String TAG = "MLTUtil: ";
 
     public static void ShowMessage(String messages, Activity activity) {
-        toast = Toast.makeText(activity, messages, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
+        TastyToast.makeText(activity,messages,TastyToast.LENGTH_SHORT,TastyToast.INFO);
     }
 
     // 隐藏键盘

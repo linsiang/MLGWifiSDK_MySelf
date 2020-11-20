@@ -158,10 +158,9 @@ public class VideoSDK extends baseAvtivity {
                 Bitmap b = BitmapFactory.decodeFile(jpgfilepath); //测试用途 ，显示抓到的图片！
                 mypictureView.setImageBitmap(b);
                 ShowLog("============msg.what==4=================");
-                BmpList bm = new BmpList(b,filename);
+                BmpList bm = new BmpList(b, filename);
                 list.add(bm);
                 bmpadapter.notifyDataSetChanged();
-
             }
             if (msg.what == 1) { //锁屏
                 Log.e("iMVR", "diagnosos--->lock ->msg.what==1");
@@ -227,10 +226,8 @@ public class VideoSDK extends baseAvtivity {
         ImageButton video_return_main = findViewById(R.id.video_return_main);
         video_bmp_listview = findViewById(R.id.video_bmp_list);
         permissionActivity.verifyStoragePermissions(VideoSDK.this);  //先获取到读取图片的权限
-
         list = new ArrayList<>();
         listPath = BmpUtil.getFilesAllName(MlgUtil.getSDPath() + "/10000/");
-
         for (String s : listPath) {
             BmpList bmps = new BmpList();
             bmps.setBitmap(BitmapFactory.decodeFile(s));
@@ -246,20 +243,16 @@ public class VideoSDK extends baseAvtivity {
                 TastyToast.makeText(getApplicationContext(), "你点击了" + bmp.getBmpText(), TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
             }
         });
-
-
         sharedPreferences = getSharedPreferences("tcfcameraN", MODE_PRIVATE);
-
-
         mSurfaceView.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                if(isbackPlay){
+                if (isbackPlay) {
                     mSurfaceView.setLayoutParams(mrLayoutParams);
                     isbackPlay = false;
-                }else{
+                } else {
 
                     mrLayoutParams = mSurfaceView.getLayoutParams();
-                    mSurfaceView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
+                    mSurfaceView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
                     isbackPlay = true;
                 }
                 return true;
@@ -402,8 +395,8 @@ public class VideoSDK extends baseAvtivity {
                                     EditPort.setHint(items[tempwhich[0]].substring(8));  //截取id的后几位
                                     VideoDecoder.SetDevIP(devips[tempwhich[0]]);
                                     try {
-                                        Thread.sleep(1000);
                                         VideoDecoder.SetDevIP(devips[tempwhich[0]]);
+                                        Thread.sleep(1000);
                                         StartVideo();
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
@@ -442,7 +435,6 @@ public class VideoSDK extends baseAvtivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
     private void saveVideoPort(int savePort) {
         SharedPreferences.Editor edit = sharedPreferences.edit();
