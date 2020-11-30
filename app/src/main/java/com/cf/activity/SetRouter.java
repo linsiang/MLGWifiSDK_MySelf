@@ -483,7 +483,7 @@ public class SetRouter extends baseAvtivity {
     public String read_ssid_pwd(String key_ssid) {
         SharedPreferences sharedPreferences = getSharedPreferences("ssid_pwd", MODE_PRIVATE);
         Log.e(TAG, "read_ssid_pwd: 这里是读取配置文件"+ sharedPreferences.getString(key_ssid, "null123"));
-        return sharedPreferences.getString(key_ssid, "null123");
+        return sharedPreferences.getString(key_ssid, "");
     }
 
     void ShiwConfirmDiagNew(EditText editssid1, EditText editpwd2) {

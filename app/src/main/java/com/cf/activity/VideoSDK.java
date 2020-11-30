@@ -83,7 +83,6 @@ public class VideoSDK extends baseAvtivity {
         final String SYSTEM_REASON = "reason";
         final String SYSTEM_HOME_KEY = "homekey";
         final String SYSTEM_HOME_KEY_LONG = "recentapps";
-
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
@@ -226,24 +225,26 @@ public class VideoSDK extends baseAvtivity {
         ImageButton video_return_main = findViewById(R.id.video_return_main);
         video_bmp_listview = findViewById(R.id.video_bmp_list);
         permissionActivity.verifyStoragePermissions(VideoSDK.this);  //先获取到读取图片的权限
-        list = new ArrayList<>();
-        listPath = BmpUtil.getFilesAllName(MlgUtil.getSDPath() + "/10000/");
-        for (String s : listPath) {
-            BmpList bmps = new BmpList();
-            bmps.setBitmap(BitmapFactory.decodeFile(s));
-            bmps.setBmpText(s.substring(s.lastIndexOf("/") + 1));
-            list.add(bmps);
-        }
-        bmpadapter = new BmpAdapter(getApplicationContext(), R.layout.bmp_items, list);
-        video_bmp_listview.setAdapter(bmpadapter);
-        video_bmp_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BmpList bmp = list.get(position);
-                TastyToast.makeText(getApplicationContext(), "你点击了" + bmp.getBmpText(), TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
-            }
-        });
+                list = new ArrayList<>();
+                listPath = BmpUtil.getFilesAllName(MlgUtil.getSDPath() + "/10000/");
+                for (int i = 0;i<6;i++) {
+                    BmpList bmps = new BmpList();
+                    bmps.setBitmap(BitmapFactory.decodeFile(listPath.get(i)));
+                    bmps.setBmpText(listPath.get(i).substring(listPath.get(i).lastIndexOf("/") + 3));
+                    list.add(bmps);
+                }
+                bmpadapter = new BmpAdapter(getApplicationContext(), R.layout.bmp_items, list);
+                video_bmp_listview.setAdapter(bmpadapter);
+                video_bmp_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        BmpList bmp = list.get(position);
+                        TastyToast.makeText(getApplicationContext(), "你点击了" + bmp.getBmpText(), TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
+                    }
+                });
+
         sharedPreferences = getSharedPreferences("tcfcameraN", MODE_PRIVATE);
+/*
         mSurfaceView.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 if (isbackPlay) {
@@ -259,6 +260,7 @@ public class VideoSDK extends baseAvtivity {
             }
             return false;
         });
+*/
 
 
         video_return_main.setOnClickListener(v -> {

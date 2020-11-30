@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.*;
 
 import com.cf.R;
+import com.cf.cf685.Video;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -25,6 +26,9 @@ public class MainActivity extends SetRouter {
     private ImageButton main_video;
     private ImageButton logoutSystem;
     private Button textbutton;
+    private ImageView light_flag;
+    private TextView text_flag;
+    private boolean flag_device = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,34 @@ public class MainActivity extends SetRouter {
         main_video = findViewById(R.id.main_camera);
         logoutSystem = findViewById(R.id.logoutSystem);
         textbutton = findViewById(R.id.testbutton);
+        light_flag = findViewById(R.id.connect_light_flag);
+        text_flag = findViewById(R.id.connect_text_flag);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (FindDevice() == 1) {
+                    text_flag.setText("已连接设备");
+                    text_flag.setTextColor(getResources().getColor(R.color.main_green_color));
+                    light_flag.setBackgroundResource(R.drawable.light_on);
+                }
+                while (flag_device) {
+                    try {
+                        Thread.sleep(10000);
+                        if (FindDevice() == 1) {
+                            text_flag.setText("已连接设备");
+                            text_flag.setTextColor(getResources().getColor(R.color.main_green_color));
+                            light_flag.setBackgroundResource(R.drawable.light_on);
+                        } else {
+                            text_flag.setText("未连接设备");
+                            text_flag.setTextColor(getResources().getColor(R.color.gray_btn_bg_pressed_color));
+                            light_flag.setBackgroundResource(R.drawable.light_off);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
 
         textbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,6 +167,9 @@ public class MainActivity extends SetRouter {
         window.setLayout(this.getResources().getDisplayMetrics().widthPixels * 6 / 10, this.getResources().getDisplayMetrics().heightPixels);
         //   getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//设置Dialog背景透明
         //   getWindow().setDimAmount(0f);//设置Dialog窗口后面的透明度
+        String[] arr0 = getRouterSSID();
+        ssid1.setText(arr0[0]);
+        pwd1.setText(arr0[1]);
         //设置自定义界面的点击事件逻辑
         dialogView.findViewById(R.id.select_wifi1).setOnClickListener(new View.OnClickListener() {
             @Override
