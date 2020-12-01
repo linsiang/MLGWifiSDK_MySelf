@@ -2,6 +2,7 @@ package com.cf.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -85,28 +86,33 @@ public class SetRouter extends baseAvtivity {
         ssid.setText(g_wifissid);
         pwd.setText(g_wifipwd);
 
-        if (g_cameramode == 0)
+        if (g_cameramode == 0) {
             groupSensor.check(R.id.setSensor_50);
-        else if (g_cameramode == 1)
+        } else if (g_cameramode == 1) {
             groupSensor.check(R.id.setSensor_200);
-        else if (g_cameramode == 2)
+        } else if (g_cameramode == 2) {
             groupSensor.check(R.id.setSensor_100);
-        if (g_wifimode == 0)
+        }
+        if (g_wifimode == 0) {
             groupModel.check(R.id.AP);
-        else if (g_wifimode == 1) {
+        } else if (g_wifimode == 1) {
             groupModel.check(R.id.ROUTER);
             String[] arr = getRouterSSID();
             ssid.setText(arr[0]);
             pwd.setText(arr[1]);
-        } else if (g_wifimode == 2)
+        } else if (g_wifimode == 2) {
             groupModel.check(R.id.HOTSPOT);
+        }
 
-        if (g_cameratype == 0)
+        if (g_cameratype == 0) {
             groupDevice.check(R.id.setBM558);
-        if (g_cameratype == 1)
+        }
+        if (g_cameratype == 1) {
             groupDevice.check(R.id.setBM999);
-        if (g_cameratype == 2)
+        }
+        if (g_cameratype == 2) {
             groupDevice.check(R.id.setBM189);
+        }
         imageView1.setOnClickListener(v -> {
             Intent intent = new Intent("android.settings.WIFI_SETTINGS");
             startActivity(intent);
@@ -193,20 +199,20 @@ public class SetRouter extends baseAvtivity {
         });
 
         GetRouterWifi.setOnClickListener(v -> {
-            GetWifiMsg(ssid,pwd);
+            GetWifiMsg(ssid, pwd);
         });
         SaveRouterWifi.setOnClickListener(v -> {
-            SetRouterWifi(ssid,pwd);
+            SetRouterWifi(ssid, pwd);
         });
         select_wifi.setOnClickListener(v -> {
-          String[] str = SelectWifiName(ssid,pwd);
-          ssid.setText(str[0]);
-          pwd.setText(str[1]);
-            Log.e(TAG, "onCreate: pwd:=========="+read_ssid_pwd(str[0]));
+            String[] str = SelectWifiName(ssid, pwd);
+            ssid.setText(str[0]);
+            pwd.setText(str[1]);
+            Log.e(TAG, "onCreate: pwd:==========" + read_ssid_pwd(str[0]));
         });
     }
 
-    public String[] SelectWifiName(EditText editText,EditText pwd) {
+    public String[] SelectWifiName(EditText editText, EditText pwd) {
         if (Build.VERSION.SDK_INT >= 23) {
             int REQUEST_CODE_CONTACT = 101;
             String[] permissions = {
@@ -234,7 +240,7 @@ public class SetRouter extends baseAvtivity {
                 List<ScanResult> wifiList = getWifiList();
                 if (wifiList == null) {
                     //  TastyToast.makeText(this,"未找到WiFi",TastyToast.LENGTH_SHORT,TastyToast.ERROR);
-                    return new String[]{editText.getText().toString(),""};
+                    return new String[]{editText.getText().toString(), ""};
                 }
                 String[] items = new String[wifiList.size()];
                 //  showTv.setText(sb);
@@ -278,8 +284,9 @@ public class SetRouter extends baseAvtivity {
             }
             break;
         }
-        return new String[]{editText.getText().toString(),pwd.getText().toString()};
+        return new String[]{editText.getText().toString(), pwd.getText().toString()};
     }
+
     //获取wifi 列表
     public ArrayList<ScanResult> getWifiList() {
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
@@ -307,8 +314,7 @@ public class SetRouter extends baseAvtivity {
     }
 
 
-    public void GetWifiMsg(EditText editText1,EditText editText2)
-    {
+    public void GetWifiMsg(EditText editText1, EditText editText2) {
         Log.e("iMVR", "btn_wifi_searchdevice=============");
         String workmode;
         if (FindDevice() == 1) {
@@ -332,7 +338,7 @@ public class SetRouter extends baseAvtivity {
             //   String Device = "Find Device-> ip:" + devip + "WifiMode:-->" + workmode;
             //  MlgUtil.ShowMessage(Device, SetRouter.this);
             TastyToast.makeText(this, "devIP  :" + devip + "  \n" + workmode + "模式", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
-            if (getwifi(editText1,editText2) == 1) {
+            if (getwifi(editText1, editText2) == 1) {
                 SaveCameraConfig();
             }
         } else {
@@ -344,16 +350,14 @@ public class SetRouter extends baseAvtivity {
     }
 
 
-
-
-
     public int FindDevice() {
         int findevice = 0;
         byte[] ip = new byte[16];
-        if (g_wifimode == 2)
+        if (g_wifimode == 2) {
             TcpSender.SetDeviceType(2); //hotspot mode
-        else
+        } else {
             TcpSender.SetDeviceType(0); //ap  or router mode!
+        }
         findevice = TcpSender.SearchDevice(ip);
         if (findevice == 1) {
             try {
@@ -368,12 +372,11 @@ public class SetRouter extends baseAvtivity {
     }
 
 
-    public void SetRouterWifi(EditText e_ssid,EditText e_pwd)
-    {
+    public void SetRouterWifi(EditText e_ssid, EditText e_pwd) {
         Log.e("iMVR", "btn_wifi_confirm");
         //保存设置
         if (FindDevice() == 1) {
-            ShiwConfirmDiagNew(e_ssid,e_pwd);
+            ShiwConfirmDiagNew(e_ssid, e_pwd);
         } else {
             // MlgUtil.ShowMessage("no Device", NewMainActivity.this);
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
@@ -383,10 +386,7 @@ public class SetRouter extends baseAvtivity {
     }
 
 
-
-
-
-    public int getwifi(EditText editssid,EditText editpwd) {
+    public int getwifi(EditText editssid, EditText editpwd) {
         byte[] t_ssid = new byte[32];
         byte[] t_pwd = new byte[20];
         int ap = 1, routerorhotspot = 4;
@@ -482,7 +482,7 @@ public class SetRouter extends baseAvtivity {
 
     public String read_ssid_pwd(String key_ssid) {
         SharedPreferences sharedPreferences = getSharedPreferences("ssid_pwd", MODE_PRIVATE);
-        Log.e(TAG, "read_ssid_pwd: 这里是读取配置文件"+ sharedPreferences.getString(key_ssid, "null123"));
+        Log.e(TAG, "read_ssid_pwd: 这里是读取配置文件" + sharedPreferences.getString(key_ssid, "null123"));
         return sharedPreferences.getString(key_ssid, "");
     }
 
@@ -514,7 +514,7 @@ public class SetRouter extends baseAvtivity {
                 //判断是不是Router模式
                 if (RouterButton.isChecked()) {
                     saveRouterSSID(g_wifissid, g_wifipwd);
-                    write_ssid_pwd(g_wifissid,g_wifipwd);
+                    write_ssid_pwd(g_wifissid, g_wifipwd);
                 }
                 if (TcpSender.setwifiinfo(mode, g_wifichannel, g_wifissid, g_wifipwd) == 0) {
                     SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(this, cn.pedant.SweetAlert.SweetAlertDialog.SUCCESS_TYPE);
@@ -556,7 +556,7 @@ public class SetRouter extends baseAvtivity {
         normalDia.setTitle("");
         normalDia.setMessage("Save change?");
         normalDia.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            //  @Override
+            @Override
             public void onClick(DialogInterface dialog, int which) {
                 g_wifissid = ssid.getText().toString().trim();
                 g_wifipwd = pwd.getText().toString().trim();
@@ -576,7 +576,7 @@ public class SetRouter extends baseAvtivity {
                     //判断是不是Router模式
                     if (RouterButton.isChecked()) {
                         saveRouterSSID(g_wifissid, g_wifipwd);
-                        write_ssid_pwd(g_wifissid,g_wifipwd);
+                        write_ssid_pwd(g_wifissid, g_wifipwd);
                     }
                     if (TcpSender.setwifiinfo(mode, g_wifichannel, g_wifissid, g_wifipwd) == 0) {
                         MlgUtil.ShowMessage("save successful", SetRouter.this);
@@ -586,10 +586,7 @@ public class SetRouter extends baseAvtivity {
                 }
             }
         });
-        normalDia.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            // @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
+        normalDia.setNegativeButton("No", (dialog, which) -> {
         });
         normalDia.create().show();
     }
@@ -597,9 +594,10 @@ public class SetRouter extends baseAvtivity {
     public int isOPenGps(Activity activity) {
 
         LocationManager lm;//【位置管理】
-        lm = (LocationManager) activity.getSystemService(activity.LOCATION_SERVICE);
+        lm = (LocationManager) activity.getSystemService(LOCATION_SERVICE);
         boolean ok = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (ok) {//开了定位服务
+        //开了定位服务
+        if (ok) {
             if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
                 TastyToast.makeText(this, "没有开启定位权限", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
@@ -612,7 +610,6 @@ public class SetRouter extends baseAvtivity {
             return 3;
         }
     }
-
     void gotoSetGps() {
         SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE);
         sweetAlertDialog.setTitleText("gps未打开，是否去打开系统的gps位置信息？");
@@ -629,7 +626,4 @@ public class SetRouter extends baseAvtivity {
         });
         sweetAlertDialog.show();
     }
-
-
-
 }

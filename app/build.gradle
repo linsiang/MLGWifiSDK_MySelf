@@ -15,6 +15,7 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false        //

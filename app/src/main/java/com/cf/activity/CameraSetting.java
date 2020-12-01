@@ -1,6 +1,4 @@
 package com.cf.activity;
-
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,6 +35,7 @@ public class CameraSetting extends baseAvtivity {
     int validwifi = -1;
     String m_ssid = null, m_passwd = null;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
      //   requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -65,28 +64,34 @@ public class CameraSetting extends baseAvtivity {
         ssid.setText(g_wifissid);
         pwd.setText(g_wifipwd);
         channel.setText(String.valueOf(g_wifichannel));
-        if (g_cameramode == 0)
+        if (g_cameramode == 0) {
             myRadioGroupmode.check(R.id.x50);
-        else if (g_cameramode == 1)
+        } else if (g_cameramode == 1) {
             myRadioGroupmode.check(R.id.x200);
-        if (g_wifimode == 0)
+        }
+        if (g_wifimode == 0) {
             myRadioGroupwifi.check(R.id.AP);
-        else if (g_wifimode == 1) {
+        } else if (g_wifimode == 1) {
             myRadioGroupwifi.check(R.id.ROUTER);
             String[] arr = getRouterSSID();
             ssid.setText(arr[0]);
             pwd.setText(arr[1]);
-        } else if (g_wifimode == 2)
+        } else if (g_wifimode == 2) {
             myRadioGroupwifi.check(R.id.HOTSPOT);
+        }
 
-        if (g_cameratype == 0)
+        if (g_cameratype == 0) {
             myRadioGroupproduct.check(R.id.bm558);
-        if (g_cameratype == 1)
+        }
+        if (g_cameratype == 1) {
             myRadioGroupproduct.check(R.id.bm999);
-        if (g_cameratype == 2)
+        }
+        if (g_cameratype == 2) {
             myRadioGroupproduct.check(R.id.bm189a);
+        }
 
         myRadioGroupmode.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (R.id.x50 == checkedId) {
                     Log.e("iMVR", "x50");
@@ -102,6 +107,7 @@ public class CameraSetting extends baseAvtivity {
         });
 
         myRadioGroupproduct.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (R.id.bm558 == checkedId) {
                     g_cameratype = 0;
@@ -122,6 +128,7 @@ public class CameraSetting extends baseAvtivity {
         });
 
         myRadioGroupwifi.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (R.id.AP == checkedId) {
                     Log.e("iMVR", "AP");
@@ -146,6 +153,7 @@ public class CameraSetting extends baseAvtivity {
         });
 
         btn_to_back.setOnClickListener(new Button.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Log.e("iMVR", "btn_to_back");
                 Intent intent = new Intent();
@@ -155,6 +163,7 @@ public class CameraSetting extends baseAvtivity {
             }
         });
         btn_to_main.setOnClickListener(new Button.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Log.e("iMVR", "btn_to_main");
                 Intent intent = new Intent();
@@ -166,6 +175,7 @@ public class CameraSetting extends baseAvtivity {
 
 
         btn_wifi_confirm.setOnClickListener(new Button.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Log.e("iMVR", "btn_wifi_confirm");
                 //保存设置
@@ -173,6 +183,7 @@ public class CameraSetting extends baseAvtivity {
             }
         });
         btn_wifi_searchdevice.setOnClickListener(new Button.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Log.e("iMVR", "btn_wifi_searchdevice=============");
                 String workmode;
@@ -220,6 +231,7 @@ public class CameraSetting extends baseAvtivity {
         normalDia.setMessage("Save change?");
         normalDia.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             //  @Override
+            @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 g_wifissid = ssid.getText().toString().trim();
@@ -257,6 +269,7 @@ public class CameraSetting extends baseAvtivity {
         });
         normalDia.setNegativeButton("No", new DialogInterface.OnClickListener() {
             // @Override
+            @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });
@@ -266,16 +279,21 @@ public class CameraSetting extends baseAvtivity {
     public int FindDevice() {
         int findevice = 0;
         byte[] ip = new byte[16];
-        if (g_wifimode == 2)
-            TcpSender.SetDeviceType(2); //hotspot mode
-        else
-            TcpSender.SetDeviceType(0); //ap  or router mode!
+        if (g_wifimode == 2) {
+            //hotspot mode
+            TcpSender.SetDeviceType(2);
+        } else {
+            //ap  or router mode!
+            TcpSender.SetDeviceType(0);
+        }
 
         findevice = TcpSender.SearchDevice(ip);
         if (findevice == 1) {
             try {
-                devip = new String(ip, "GB2312");  //以gb2312的格式进行解码，返回的是字符串
-                devip = devip.trim();   //去除头尾空格
+                //以gb2312的格式进行解码，返回的是字符串
+                devip = new String(ip, "GB2312");
+                //去除头尾空格
+                devip = devip.trim();
                 Log.e("iMVR", "--------devip----------------:" + devip);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -288,7 +306,7 @@ public class CameraSetting extends baseAvtivity {
         byte[] t_ssid = new byte[32];
         byte[] t_pwd = new byte[20];
         int ap = 1, routerorhotspot = 4;
-        int mode = 0;
+        int mode;
         if (g_wifimode == 0) {
             mode = ap;
         } else {
@@ -320,6 +338,7 @@ public class CameraSetting extends baseAvtivity {
         return validwifi;
     }
 
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME) {
             Log.e("iMVR", "stop video");

@@ -43,29 +43,26 @@ public class MainActivity extends SetRouter {
         textbutton = findViewById(R.id.testbutton);
         light_flag = findViewById(R.id.connect_light_flag);
         text_flag = findViewById(R.id.connect_text_flag);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (FindDevice() == 1) {
-                    text_flag.setText("已连接设备");
-                    text_flag.setTextColor(getResources().getColor(R.color.main_green_color));
-                    light_flag.setBackgroundResource(R.drawable.light_on);
-                }
-                while (flag_device) {
-                    try {
-                        Thread.sleep(10000);
-                        if (FindDevice() == 1) {
-                            text_flag.setText("已连接设备");
-                            text_flag.setTextColor(getResources().getColor(R.color.main_green_color));
-                            light_flag.setBackgroundResource(R.drawable.light_on);
-                        } else {
-                            text_flag.setText("未连接设备");
-                            text_flag.setTextColor(getResources().getColor(R.color.gray_btn_bg_pressed_color));
-                            light_flag.setBackgroundResource(R.drawable.light_off);
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+        new Thread(() -> {
+            if (FindDevice() == 1) {
+                text_flag.setText("已连接设备");
+                text_flag.setTextColor(getResources().getColor(R.color.main_green_color));
+                light_flag.setBackgroundResource(R.drawable.light_on);
+            }
+            while (flag_device) {
+                try {
+                    Thread.sleep(10000);
+                    if (FindDevice() == 1) {
+                        text_flag.setText("已连接设备");
+                        text_flag.setTextColor(getResources().getColor(R.color.main_green_color));
+                        light_flag.setBackgroundResource(R.drawable.light_on);
+                    } else {
+                        text_flag.setText("未连接设备");
+                        text_flag.setTextColor(getResources().getColor(R.color.gray_btn_bg_pressed_color));
+                        light_flag.setBackgroundResource(R.drawable.light_off);
                     }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }).start();

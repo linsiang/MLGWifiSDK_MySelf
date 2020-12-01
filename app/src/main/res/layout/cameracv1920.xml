@@ -131,19 +131,15 @@
                     android:layout_marginTop="0dp"
                     android:background="@drawable/power_off" />
 
-                <Button
-                    style="@style/top_group"
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_weight="1"
-                    android:visibility="invisible" />
-
-                <Button
-                    style="@style/top_all"
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_weight="1"
-                    android:visibility="invisible" />
+              <TextView
+                      android:id="@+id/checkwifi"
+                      android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="未连接wifi"
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"
+                        />
 
                 <ImageButton
                     android:id="@+id/video_return_main"

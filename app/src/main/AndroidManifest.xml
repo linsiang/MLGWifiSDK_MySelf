@@ -15,6 +15,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <permission android:name="android.permission.WRITE_SETTINGS" />
     <permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取WIFI信息状态的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 获取网络状态改变的权限 -->
 
     <supports-screens
         android:anyDensity="true"

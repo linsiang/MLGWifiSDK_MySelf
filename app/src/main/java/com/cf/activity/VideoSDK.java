@@ -12,6 +12,8 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,14 +27,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.*;
 
 import com.cf.R;
 import com.cf.cf685.Video;
@@ -46,6 +41,9 @@ import com.sdsmdg.tastytoast.TastyToast;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -67,22 +65,28 @@ public class VideoSDK extends baseAvtivity {
     public ImageView mypictureView;
     private int videoPort = 40003;
     private EditText EditPort;
-    private AlertDialog alertDialog1; //信息框
+    private AlertDialog alertDialog1;
+    //信息框
     public SurfaceView mSurfaceView;
     private ImageButton power_on_off;
     boolean isScale = true;
     private SharedPreferences sharedPreferences;
     public String CurrentJPGFile;
     private ListView video_bmp_listview;
+    private TextView textView_checkwifi;
     List<BmpList> list;
     List<String> listPath;
     ArrayAdapter<BmpList> bmpadapter;
-    private ViewGroup.LayoutParams mrLayoutParams; //默认布局
+    private ViewGroup.LayoutParams mrLayoutParams;
+    //默认布局
+    ExecutorService executorService = Executors.newCachedThreadPool();
     private boolean isbackPlay = false;
     private final BroadcastReceiver mHomeKeyEventReceiver = new BroadcastReceiver() {
         final String SYSTEM_REASON = "reason";
         final String SYSTEM_HOME_KEY = "homekey";
         final String SYSTEM_HOME_KEY_LONG = "recentapps";
+
+        @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
@@ -216,6 +220,7 @@ public class VideoSDK extends baseAvtivity {
         mypictureView.setVisibility(View.VISIBLE);
         Button videobuttonStart = findViewById(R.id.face_startbtn);
         Button videobuttonStop = findViewById(R.id.face_stopbtn);
+        textView_checkwifi = findViewById(R.id.checkwifi);
         EditPort = findViewById(R.id.EditPort);
         EditPort.setHint("setPort");
         Button setPort = findViewById(R.id.SetPort);
@@ -224,27 +229,51 @@ public class VideoSDK extends baseAvtivity {
         power_on_off = findViewById(R.id.show_power);
         ImageButton video_return_main = findViewById(R.id.video_return_main);
         video_bmp_listview = findViewById(R.id.video_bmp_list);
-        permissionActivity.verifyStoragePermissions(VideoSDK.this);  //先获取到读取图片的权限
-                list = new ArrayList<>();
-                listPath = BmpUtil.getFilesAllName(MlgUtil.getSDPath() + "/10000/");
-                for (int i = 0;i<6;i++) {
-                    BmpList bmps = new BmpList();
-                    bmps.setBitmap(BitmapFactory.decodeFile(listPath.get(i)));
-                    bmps.setBmpText(listPath.get(i).substring(listPath.get(i).lastIndexOf("/") + 3));
-                    list.add(bmps);
-                }
-                bmpadapter = new BmpAdapter(getApplicationContext(), R.layout.bmp_items, list);
-                video_bmp_listview.setAdapter(bmpadapter);
-                video_bmp_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        BmpList bmp = list.get(position);
-                        TastyToast.makeText(getApplicationContext(), "你点击了" + bmp.getBmpText(), TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
-                    }
-                });
+        permissionActivity.verifyStoragePermissions(VideoSDK.this);
+        //先获取到读取图片的权限
 
+
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                if (getConnectWifiSsid() != null) {
+                    textView_checkwifi.setText(getConnectWifiSsid().replace("\"",""));
+                } else {
+                    textView_checkwifi.setText("未连接wifi");
+                }
+                while (true) {
+                    try {
+                        Thread.sleep(10000);
+                        if (getConnectWifiSsid() != null) {
+                            textView_checkwifi.setText(getConnectWifiSsid().replace("\"",""));
+                        } else {
+                            textView_checkwifi.setText("未连接wifi");
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        list = new ArrayList<>();
+        listPath = BmpUtil.getFilesAllName(MlgUtil.getSDPath() + "/10000/");
+        for (int i = 0; i < 6; i++) {
+            BmpList bmps = new BmpList();
+            bmps.setBitmap(BitmapFactory.decodeFile(listPath.get(i)));
+            bmps.setBmpText(listPath.get(i).substring(listPath.get(i).lastIndexOf("/") + 3));
+            list.add(bmps);
+        }
+        bmpadapter = new BmpAdapter(getApplicationContext(), R.layout.bmp_items, list);
+        video_bmp_listview.setAdapter(bmpadapter);
+        video_bmp_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                BmpList bmp = list.get(position);
+                TastyToast.makeText(getApplicationContext(), "你点击了" + bmp.getBmpText(), TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
+            }
+        });
         sharedPreferences = getSharedPreferences("tcfcameraN", MODE_PRIVATE);
-/*
         mSurfaceView.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 if (isbackPlay) {
@@ -260,7 +289,6 @@ public class VideoSDK extends baseAvtivity {
             }
             return false;
         });
-*/
 
 
         video_return_main.setOnClickListener(v -> {
@@ -307,8 +335,9 @@ public class VideoSDK extends baseAvtivity {
         });
         //
         videobuttonCapture.setOnClickListener(v -> {
-            if (running)
+            if (running) {
                 VideoDecoder.ManualCapture(); //手工抓图
+            }
         });
         //
         videobuttonStart.setOnClickListener(v -> StartVideo());
@@ -420,11 +449,13 @@ public class VideoSDK extends baseAvtivity {
 
     }
 
+    @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
 
 
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME) {
             unregisterReceiver(mHomeKeyEventReceiver);
@@ -495,6 +526,7 @@ public class VideoSDK extends baseAvtivity {
     }
 
     private class CodecClient implements Runnable {
+        @Override
         public void run() {
             new Thread(new ThreadCodec()).start();
         }
@@ -510,6 +542,14 @@ public class VideoSDK extends baseAvtivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    private String getConnectWifiSsid() {
+        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        Log.d("wifiInfo", wifiInfo.toString());
+        Log.d("SSID", wifiInfo.getSSID());
+        return wifiInfo.getSSID();
     }
 
     private String addBeforeZero(int num) {
